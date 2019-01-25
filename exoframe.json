@@ -1,0 +1,7 @@
+{
+  "name": "feedback-fs",
+  "domain": "feedback.ms.epickiwi.fr",
+  "env":{
+    "GH_TOKEN": "@gh-token"
+  }
+}
