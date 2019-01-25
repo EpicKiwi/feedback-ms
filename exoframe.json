@@ -3,5 +3,10 @@
   "domain": "feedback.ms.epickiwi.fr",
   "env":{
     "GH_TOKEN": "@gh-token"
+  },
+  "rateLimit": {
+    "period": "1s",
+    "average": 1,
+    "burst": 5
   }
 }

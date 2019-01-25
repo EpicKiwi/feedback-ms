@@ -3,13 +3,13 @@ const axios = require("axios")
 const ow = require("ow")
 const {projects,titleSize} = require("./settings")
 
-module.exports = withErrorHandling(async function makeFeedback(req){
+module.exports = withAllCORS(withErrorHandling(async function makeFeedback(req,res){
     let args = await getArgs(req)
 
     let title = extractTitle(args.content)
     let createdIssue = await createIssue(args.project,title,args.content);
 
-    return {
+    return send(res,201,{
         ok: true,
         title: createdIssue.title,
         content: createdIssue.body,
@@ -18,8 +18,8 @@ module.exports = withErrorHandling(async function makeFeedback(req){
         repositoryUrl: `https://github.com/${args.project.repository}`,
         repository: args.project.repository,
         date: createdIssue["created_at"]
-    }
-});
+    })
+}))
 
 async function createIssue(project,title,content){
     ow(project.repository,ow.string,'project.repository')
@@ -104,5 +104,15 @@ function withErrorHandling(fn) {
                 send(res, 500, {error:"Internal server error"})
             }
         }
+    }
+}
+
+function withAllCORS(fn) {
+    return async (req,res) => {
+        res.setHeader('Access-Control-Allow-Origin','*')
+        if(req.method === "OPTIONS"){
+            return send(res,404)
+        }
+        return await fn(req,res);
     }
 }
