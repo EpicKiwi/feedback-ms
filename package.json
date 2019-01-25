@@ -1,0 +1,34 @@
+{
+  "name": "feedback-ms",
+  "version": "1.0.0",
+  "description": "Microservice handling feedbacks through GitHub issues",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "micro",
+    "dev": "micro-dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EpicKiwi/feedback-ms.git"
+  },
+  "keywords": [
+    "microservice",
+    "feedbacks",
+    "github"
+  ],
+  "author": "EpicKiwi <me@epickiwi.fr>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/EpicKiwi/feedback-ms/issues"
+  },
+  "homepage": "https://github.com/EpicKiwi/feedback-ms#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "micro": "^9.3.3",
+    "ow": "^0.10.0"
+  },
+  "devDependencies": {
+    "micro-dev": "^3.0.0"
+  }
+}
