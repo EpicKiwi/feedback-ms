@@ -4,6 +4,8 @@ services:
     image: epickiwi/epickiwi-feedback-ms
     networks:
       - traefik-net
+    env_file:
+      - .env
     deploy:
       labels:
         traefik.enable: "true"
