@@ -1,0 +1,22 @@
+version: '3'
+services:
+  web:
+    image: epickiwi/epickiwi-feedback-ms
+    networks:
+      - traefik-net
+    deploy:
+      labels:
+        traefik.enable: "true"
+        traefik.http.services.feedback-ms.loadbalancer.server.port: "80"
+
+        traefik.http.routers.feedback-ms.entrypoints: web-secure
+        traefik.http.routers.feedback-ms.rule: "Host(`feedback.ms.epickiwi.fr`)"
+        traefik.http.routers.feedback-ms.tls.certresolver: letsencrypt
+
+        traefik.http.routers.feedback-ms-insecure.entrypoints: web
+        traefik.http.routers.feedback-ms-insecure.rule: "Host(`feedback.ms.epickiwi.fr`)"
+        traefik.http.routers.feedback-ms-insecure.middlewares: force-https@file
+
+networks:
+  traefik-net:
+    external: true
