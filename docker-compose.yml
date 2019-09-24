@@ -13,11 +13,14 @@ services:
 
         traefik.http.routers.feedback-ms.entrypoints: web-secure
         traefik.http.routers.feedback-ms.rule: "Host(`feedback.ms.epickiwi.fr`)"
+        traefik.http.routers.feedback-ms.middlewares: "feedback-ms-ratelimit"
         traefik.http.routers.feedback-ms.tls.certresolver: letsencrypt
 
         traefik.http.routers.feedback-ms-insecure.entrypoints: web
         traefik.http.routers.feedback-ms-insecure.rule: "Host(`feedback.ms.epickiwi.fr`)"
         traefik.http.routers.feedback-ms-insecure.middlewares: force-https@file
+
+        traefik.http.middlewares.feedback-ms-ratelimit.ratelimit.average: 5
 
 networks:
   traefik-net:
